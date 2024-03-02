@@ -1,12 +1,19 @@
 body{
     margin: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 :root{
     --grey--blue: #3D5A80;
     --charcol: #293241;
     --white--blue: #E0FBFC;
+    --error--red: #f08484;
+}
+
+
+.errorMessage{
+    color: var(--error--red);
 }
 
 #nav-container{
@@ -23,7 +30,6 @@ body{
 }
 
 .navbar{
-    
     display: none;
 }
 
@@ -34,7 +40,6 @@ body{
 
 .list-item {
     display: flex;
-    
 }
 
 .list-item span {
@@ -47,27 +52,64 @@ body{
     filter: invert(100%) sepia(33%) saturate(4642%) hue-rotate(175deg) brightness(105%) contrast(111%);
     width: 10%;
     padding-bottom: 2em;
-    
 }
 
 .navbar ul{
     list-style-type: none;
     padding: 1em;
+    margin: 0;
+}
+
+.flex{
+    display: flex;
+}
+
+#modal{
+    display: none;
 }
 
 #modal,input{
     background-color: var(--grey--blue);
 }
 
+.no-task-input,.no-date-input{
+    color: var(--error--red);
+    margin: 1em;
+    display: none;
+}
+
 input{
     border: transparent;
     height: 3em;
+    margin: 1em;
+}
+
+input::placeholder, input[type="date"]{
+    color:var(--white--blue);
+}
+
+#date{
+    width: 10em;
+}
+
+#date,#task{
+    border-bottom: 1px solid var(--white--blue);
 }
 
 input:placeholder,input[type="text"]{
     margin-left:10px !important;
     color: var(--white--blue) !important;
 }
+
+input[type="submit"]{
+    background-color: var(--charcol);
+    width: 40%;
+    margin: 1em auto;
+    color: var(--white--blue);
+    text-align: center;
+}
+
+
 /*Burger Menu Animation*/
 
 @keyframes Burg-slide-down {
