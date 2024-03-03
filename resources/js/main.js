@@ -18,6 +18,7 @@ addTaskBtn.addEventListener("click",() => {
 let closeModal = document.querySelector("#close");
 
 closeModal.addEventListener("click",(e) => {
+    e.preventDefault();
     modal.style.display = "none";
     if(closeModal){
         InputNoTask.style.display = "none";
@@ -28,7 +29,10 @@ closeModal.addEventListener("click",(e) => {
     if(timeout){
         clearTimeout(timeout);
     }
-    e.preventDefault();
+    
+
+    InputTask.value = "";
+    InputDate.value = "";
 });
 
 /*Arrray for Tasks*/
@@ -48,12 +52,7 @@ let day = currentDate.getDate().toString().padStart(2, '0');
 let randomId = Math.round(Math.random() * parseInt(`${year}${month}${day}`, 10) * 100);
 //console.log(randomId);
 
-/*Time Stamp*/
-let hours = currentDate.getHours().toString().padStart(2, '0');
-let minutes = currentDate.getMinutes().toString().padStart(2, '0');
-let seconds = currentDate.getSeconds().toString().padStart(2, '0');
 
-let timeStamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 //console.log(timeStamp);
 
 /*Submit  Task Form*/
@@ -92,16 +91,21 @@ submitForm.addEventListener("click",(e) => {
             e.preventDefault();
         }
 
-        createTask()
+        createTask();
         
         InputTask.value = "";
         InputDate.value = "";
 });
 
 
-
-
 function createTask(){
+
+    /*Time Stamp*/
+    let hours = currentDate.getHours().toString().padStart(2, '0');
+    let minutes = currentDate.getMinutes().toString().padStart(2, '0');
+    let seconds = currentDate.getSeconds().toString().padStart(2, '0');
+
+    let timeStamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 
     let taskListEl = document.querySelector(".taskList");
 
@@ -114,6 +118,9 @@ function createTask(){
 
     taskArray.push(taskObj);
 
-    
+    taskArray.forEach(tasks => {
+        
+        tasks.innerHTML = ``
+    });
 
 }

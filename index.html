@@ -1,57 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Keep track of your daily tasks."> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Keep track of your daily tasks." />
 
-    <link rel="stylesheet" href="./resources/css/main.css">
+    <link rel="stylesheet" href="./resources/css/main.css" />
     <script src="./resources/js/main.js" defer></script>
 
     <title>To Do App</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <header>
-        <div id="nav-container">
-
-            <div id="burger-menu">
-                <img src="./resources/icons/Burger.png" alt="Burger Menu">
-            </div>
-
-            <nav class="navbar">
-                <ul>
-                    <li class="list-item" id="add-task"><img src="./resources/icons/add button.png" alt="Add task button"><span>Add task</span></li>
-                    <li class="list-item"><img src="./resources/icons/dashboard.png" alt="dashboard button"><span>Dashboard</span></li>
-                    <li class="list-item"><img src="./resources/icons/Tasks.png" alt="Task button"><span>Current Tasks</span></li>
-                    <li class="list-item"><img src="./resources/icons/completed-task.png" alt="Completed-Task button"><span>Completed Tasks</span></li>
-                </ul>
-            </nav>
+      <div id="nav-container">
+        <div id="burger-menu">
+          <img src="./resources/icons/Burger.png" alt="Burger Menu" />
         </div>
+
+        <nav class="navbar">
+          <ul>
+            <li class="list-item" id="add-task">
+              <img
+                src="./resources/icons/add button.png"
+                alt="Add task button"
+              /><span>Add task</span>
+            </li>
+            <li class="list-item">
+              <img
+                src="./resources/icons/dashboard.png"
+                alt="dashboard button"
+              /><span>Dashboard</span>
+            </li>
+            <li class="list-item">
+              <img src="./resources/icons/Tasks.png" alt="Task button" /><span
+                >Current Tasks</span
+              >
+            </li>
+            <li class="list-item">
+              <img
+                src="./resources/icons/completed-task.png"
+                alt="Completed-Task button"
+              /><span>Completed Tasks</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <section>
+      <form id="modal">
+        <div class="no-task-input">Please add a task!</div>
+        <input type="text" id="task" name="task" placeholder="Add task..." />
 
-        <form id="modal">
+        <div class="no-date-input">Please add a date!</div>
+        <input type="date" id="date" placeholder="Choose due date.." />
 
-            <div class="no-task-input">Please add a task!</div>
-            <input type="text" id="task" name = "task" placeholder="Add task...">
-
-            <div class="no-date-input">Please add a date!</div>
-            <input type="date" id = "date" placeholder="Choose due date.."> 
-
-            <div class="flex">
-                <input type="submit" id = "submit" >
-                <input type="submit" id = "close" value="Close">
-            </div>
-        </form>
-
+        <div class="flex">
+          <input type="submit" id="submit" />
+          <input type="submit" id="close" value="Close" />
+        </div>
+      </form>
     </section>
 
-    <main>
-        <div id="task-container">
-            <div class="taskList"></div>
+    <div class="taskList">
+      <ul>
+        <div class="task-flex">
+          <img src="./resources/icons/more options.png" alt="More Options" />
+          <li class="list-item" id="list-item-task">test</li>
+          <li class="list-item" id="list-item-date">2024/03/03</li>
         </div>
-    </main>
-</body>
+      </ul>
+    </div>
+    
+  </body>
 </html>

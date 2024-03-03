@@ -82,6 +82,7 @@ input{
     border: transparent;
     height: 3em;
     margin: 1em;
+    color: var(--white--blue);
 }
 
 input::placeholder, input[type="date"]{
@@ -107,6 +108,27 @@ input[type="submit"]{
     margin: 1em auto;
     color: var(--white--blue);
     text-align: center;
+}
+
+
+
+.taskList{
+    max-width: 100%;
+}
+
+.task-flex{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: var(--grey--blue);
+}
+
+.task-flex img{
+    width: 10%;
+}
+
+#list-item-task{
+    padding-right:8em;
 }
 
 
