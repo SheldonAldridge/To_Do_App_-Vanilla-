@@ -58,7 +58,7 @@ let randomId = Math.round(Math.random() * parseInt(`${year}${month}${day}`, 10) 
 /*Submit  Task Form*/
 let submitForm = document.querySelector("#submit");
 let InputTask = document.querySelector("#task");
-let InputDate = document.querySelector("#date");
+let InputDate = document.querySelector("#duedate");
 let InputNoTask = document.querySelector(".no-task-input");
 let InputNoDate = document.querySelector(".no-date-input");
 let timeout;
@@ -118,9 +118,18 @@ function createTask(){
 
     taskArray.push(taskObj);
 
-    taskArray.forEach(tasks => {
-        
-        tasks.innerHTML = ``
-    });
+    const listItemTask = document.getElementById('list-item-task');
+    const maxLength = 5;
 
+    listItemTask.addEventListener('input', () =>{
+        const text = listItemTask.innerText;
+
+        if(text.length > maxLength){
+            listItemTask.innerText = text.slice(0, maxLength);
+        }
+        listItemTask.innerHTML = listItemTask.innerHTML.replace(/\n/g, '<br>');
+    })
+
+    
 }
+

@@ -19,7 +19,7 @@ body{
 #nav-container{
     background-color: var(--charcol);
     height: auto;
-    width: 100%;
+    max-width: 100%;
 }
 
 #burger-menu img{
@@ -40,18 +40,15 @@ body{
 
 .list-item {
     display: flex;
-}
-
-.list-item span {
-    margin: 5px 20px;
     color: var(--white--blue);
-    font-size: 20px;
+    font-size: 15px;
+    align-items: center;
 }
 
 .list-item img{
+    width:10%;
     filter: invert(100%) sepia(33%) saturate(4642%) hue-rotate(175deg) brightness(105%) contrast(111%);
-    width: 10%;
-    padding-bottom: 2em;
+    margin: 1em;
 }
 
 .navbar ul{
@@ -110,27 +107,66 @@ input[type="submit"]{
     text-align: center;
 }
 
-
-
 .taskList{
+    display: grid;
+    grid-template-columns: auto auto;
     max-width: 100%;
 }
 
-.task-flex{
-    display: flex;
-    flex-wrap: nowrap;
+.task-buttons{
+    display: grid;
+    gap: 40px; 
     align-items: center;
+    justify-content: center;
+    margin: 2em auto;
+}
+
+.task-buttons img{
+    margin: 5px;
+    filter: invert(100%) sepia(33%) saturate(4642%) hue-rotate(175deg) brightness(105%) contrast(111%);
+}
+
+
+
+.task-flex{
+    
+    display: flex;
+    margin: 1em auto;
     background-color: var(--grey--blue);
+    width: 70%;
+    height: 30vh;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding-right: 1em;
 }
 
 .task-flex img{
-    width: 10%;
+    width: 20%;
+}
+
+.task-to-do{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 1em;
+}
+
+#list-item-date{
+    position: absolute;
+    transform: translateY(-410%);
 }
 
 #list-item-task{
-    padding-right:8em;
+    position: absolute;
+    right: 60%;
+    transform: translateX(0%);
 }
-
 
 /*Burger Menu Animation*/
 
