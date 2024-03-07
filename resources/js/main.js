@@ -41,19 +41,7 @@ let taskArray=[];
 console.log(taskArray);
 let complTaskarray = [];
 console.log(complTaskarray);
-/*RandomID*/
-let currentDate = new Date();
 
-let year = currentDate.getFullYear();
-let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-let day = currentDate.getDate().toString().padStart(2, '0'); 
-
-
-let randomId = Math.round(Math.random() * parseInt(`${year}${month}${day}`, 10) * 100);
-//console.log(randomId);
-
-
-//console.log(timeStamp);
 
 /*Submit  Task Form*/
 let submitForm = document.querySelector("#submit");
@@ -113,8 +101,7 @@ function createTask(){
     let seconds = currentDate.getSeconds().toString().padStart(2, '0');
 
     let timeStamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
-
-    
+    let randomId = Math.round(Math.random() * parseInt(`${year}${month}${day}`, 10) * 100);
 
     let taskObj = {
         timeStamp: timeStamp, 
@@ -124,8 +111,8 @@ function createTask(){
     }
 
     taskArray.push(taskObj);
+    console.log(taskArray);
 
-    
     taskArray.forEach(task => {
 
         let divEl = document.createElement('div');
@@ -138,13 +125,13 @@ function createTask(){
       </div>
 
       <div class="task-to-do">
-          <div class="list" id="list-item-date">Due: ${taskObj.date}</div>
-          <div class="list" id="list-item-task">${taskObj.task}</div>
+          <div class="list" id="list-item-date">Due: ${task.date}</div>
+          <div class="list" id="list-item-task">${task.task}</div>
       </div>`
         
-      taskListEl.append(divEl);
       
-      console.log(divEl);
+      taskListEl.append(divEl);
+      console.log(taskListEl);
     });
 
     
