@@ -79,14 +79,16 @@ submitForm.addEventListener("click",(e) => {
             e.preventDefault();
         }
 
+    else{
         createTask();
-        
         InputTask.value = "";
         InputDate.value = "";
+        modal.style.display = "none";
+    }
+        
 });
 
 let taskListEl = document.getElementById('tasklist');
-    console.log(taskListEl)
 
 function createTask(){
 
@@ -124,14 +126,13 @@ function createTask(){
         <img src="./resources/icons/completed-task.png" alt="Complete Task Button" />
       </div>
 
-      <div class="task-to-do">
+      <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
           <div class="list" id="list-item-date">Due: ${task.date}</div>
           <div class="list" id="list-item-task">${task.task}</div>
       </div>`
         
       
       taskListEl.append(divEl);
-      console.log(taskListEl);
     });
 
     

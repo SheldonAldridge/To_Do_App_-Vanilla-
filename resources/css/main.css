@@ -119,11 +119,13 @@ input[type="submit"]{
     align-items: center;
     justify-content: center;
     margin: 2em auto;
+    width: 100%;
 }
 
 .task-buttons img{
     margin: 5px;
     filter: invert(100%) sepia(33%) saturate(4642%) hue-rotate(175deg) brightness(105%) contrast(111%);
+    
 }
 
 
@@ -163,7 +165,8 @@ input[type="submit"]{
 
 #list-item-date{
     position: absolute;
-    transform: translateY(-410%);
+    transform: translateY(-425%);
+    left: -20%;
 }
 
 #list-item-task{
