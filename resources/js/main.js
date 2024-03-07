@@ -97,17 +97,24 @@ submitForm.addEventListener("click",(e) => {
         InputDate.value = "";
 });
 
+let taskListEl = document.getElementById('tasklist');
+    console.log(taskListEl)
 
 function createTask(){
 
     /*Time Stamp*/
+    let currentDate = new Date();
+
+    let year = currentDate.getFullYear();
+    let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    let day = currentDate.getDate().toString().padStart(2, '0'); 
     let hours = currentDate.getHours().toString().padStart(2, '0');
     let minutes = currentDate.getMinutes().toString().padStart(2, '0');
     let seconds = currentDate.getSeconds().toString().padStart(2, '0');
 
     let timeStamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 
-    let taskListEl = document.querySelector(".taskList");
+    
 
     let taskObj = {
         timeStamp: timeStamp, 
@@ -119,6 +126,26 @@ function createTask(){
     taskArray.push(taskObj);
 
     
+    taskArray.forEach(task => {
+
+        let divEl = document.createElement('div');
+        divEl.classList.add("task-flex");
+
+        divEl.innerHTML = `<div class="task-buttons">
+        <img src="./resources/icons/edit.png" alt="Edit Buttin"/>
+        <img src="./resources/icons/bin.png" alt="Bin Buttons" />
+        <img src="./resources/icons/completed-task.png" alt="Complete Task Button" />
+      </div>
+
+      <div class="task-to-do">
+          <div class="list" id="list-item-date">Due: ${taskObj.date}</div>
+          <div class="list" id="list-item-task">${taskObj.task}</div>
+      </div>`
+        
+      taskListEl.append(divEl);
+      
+      console.log(divEl);
+    });
 
     
 }
