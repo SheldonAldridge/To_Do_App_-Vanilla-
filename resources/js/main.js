@@ -118,17 +118,7 @@ function createTask(){
 
     taskArray.push(taskObj);
 
-    const listItemTask = document.getElementById('list-item-task');
-    const maxLength = 5;
-
-    listItemTask.addEventListener('input', () =>{
-        const text = listItemTask.innerText;
-
-        if(text.length > maxLength){
-            listItemTask.innerText = text.slice(0, maxLength);
-        }
-        listItemTask.innerHTML = listItemTask.innerHTML.replace(/\n/g, '<br>');
-    })
+    
 
     
 }

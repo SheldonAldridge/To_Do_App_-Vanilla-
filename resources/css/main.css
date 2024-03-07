@@ -157,6 +157,10 @@ input[type="submit"]{
     padding: 0 1em;
 }
 
+.list{
+    color: var(--white--blue);
+}
+
 #list-item-date{
     position: absolute;
     transform: translateY(-410%);
