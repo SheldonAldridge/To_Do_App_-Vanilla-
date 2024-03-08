@@ -1,6 +1,7 @@
 /*Global Variables*/
 
 let taskArray = [];
+console.log(taskArray);
 let completeTaskarray = [];
 let submitForm = document.querySelector("#submit");
 let InputTask = document.querySelector("#task");
@@ -67,31 +68,14 @@ submitForm.addEventListener("click", (e) => {
     
   } else {
     createTask();
-    InputTask.value = "";
-    InputDate.value = "";
     modal.style.display = "none";
   }
 });
 
-/*Local Storage*/
-
-function storeTaskArrayLocally() {
-    localStorage.setItem("taskLocalstorage", JSON.stringify(taskArray));
-}
-
-function initializeTaskAraryFromLocalStoraege(){
-    const storedTask = localStorage.getItem("taskLocalstorage");
-
-    if(storedTask){
-        taskArray.JSON.parse(storedTask)
-        renderTask();
-    }
-    
-}
 
 let taskListEl = document.getElementById("tasklist");
 
-initializeTaskAraryFromLocalStoraege();
+
 
 function createTask() {
   /*Time Stamp*/
@@ -117,6 +101,7 @@ function createTask() {
   taskArray.push(taskObj);
   renderTask()
   storeTaskArrayLocally();
+  
 }
 
 function renderTask(){
@@ -137,5 +122,24 @@ function renderTask(){
           </div>`;
     
         taskListEl.append(divEl);
+        
       });
 }
+
+/*Local Storage*/
+
+function storeTaskArrayLocally() {
+  localStorage.setItem("taskLocalstorage", JSON.stringify(taskArray));
+}
+
+function initializeTaskAraryFromLocalStoraege(){
+  const storedTask = localStorage.getItem("taskLocalstorage");
+
+  if(storedTask){
+      taskArray = JSON.parse(storedTask);
+      renderTask();
+  }
+  
+}
+
+initializeTaskAraryFromLocalStoraege();
