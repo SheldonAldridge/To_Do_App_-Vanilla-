@@ -1,7 +1,6 @@
 /*Global Variables*/
 
 let taskArray = [];
-console.log(taskArray);
 let completeTaskarray = [];
 let submitForm = document.querySelector("#submit");
 let InputTask = document.querySelector("#task");
@@ -69,7 +68,12 @@ submitForm.addEventListener("click", (e) => {
   } else {
     createTask();
     modal.style.display = "none";
+    InputTask.value = "";
+    InputDate.value = "";
   }
+
+  
+
 });
 
 
@@ -104,16 +108,18 @@ function createTask() {
   
 }
 
+
+/*Render Tasks on DOM*/
 function renderTask(){
-    taskListEl.innerHTML = '';
+    
     taskArray.forEach((task) => {
         let divEl = document.createElement("div");
         divEl.classList.add("task-flex");
     
         divEl.innerHTML = `<div class="task-buttons">
-            <img src="./resources/icons/edit.png" alt="Edit Buttin"/>
-            <img src="./resources/icons/bin.png" alt="Bin Buttons" />
-            <img src="./resources/icons/completed-task.png" alt="Complete Task Button" />
+            <img src="./resources/icons/edit.png" id="edit-button" alt="Edit Buttin"/>
+            <img src="./resources/icons/bin.png" id="remove-button" alt="Bin Buttons" />
+            <img src="./resources/icons/completed-task.png" id="complete-button" alt="Complete Task Button" />
           </div>
     
           <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
@@ -124,7 +130,10 @@ function renderTask(){
         taskListEl.append(divEl);
         
       });
+
 }
+
+/*edit Task Function*/
 
 /*Local Storage*/
 
@@ -143,3 +152,4 @@ function initializeTaskAraryFromLocalStoraege(){
 }
 
 initializeTaskAraryFromLocalStoraege();
+console.log(taskArray);
