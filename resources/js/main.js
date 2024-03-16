@@ -131,9 +131,20 @@ function renderTask(){
         
       });
 
+      /*edit Task Function*/
+
+    let editBtn = document.getElementById("edit-button");
+
+    editBtn.addEventListener("click", (event) =>{
+       for (let i = 0; i < taskArray.length; i++) {
+        const element = element.target[i];
+        console.log(element);
+       }
+    })
+
 }
 
-/*edit Task Function*/
+
 
 /*Local Storage*/
 
