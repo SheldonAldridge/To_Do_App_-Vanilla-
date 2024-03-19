@@ -131,20 +131,23 @@ function renderTask(){
         
       });
 
-      /*edit Task Function*/
+    // Event listener for edit buttons
+    let editBtns = document.querySelectorAll("#edit-button");
+    
 
-    let editBtn = document.getElementById("edit-button");
+    editBtns.forEach(editBtn => {
 
-    editBtn.addEventListener("click", (event) =>{
-       for (let i = 0; i < taskArray.length; i++) {
-        const element = element.target[i];
-        console.log(element);
-       }
-    })
-
+      
+      let toDoTask = grandparent.querySelector(".task-to-do")
+      let dataId = toDoTask.getAttribute("data-id");
+      
+      editBtn.addEventListener("click", (event) => {
+          console.log(`Edit button clicked for task with data-id: ${dataId}`);
+          
+      });
+  });
+    
 }
-
-
 
 /*Local Storage*/
 
