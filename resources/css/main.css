@@ -63,7 +63,7 @@ body{
 
 
 
-#modal{
+#modal,#edit-modal{
     display: none;
 }
 

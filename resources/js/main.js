@@ -9,6 +9,12 @@ let InputNoTask = document.querySelector(".no-task-input");
 let InputNoDate = document.querySelector(".no-date-input");
 let timeout;
 
+let EditedsubmitForm = document.querySelector("#edit-submit");
+let EditedInputTask = document.querySelector("#edit-task");
+let EditedInputDate = document.querySelector("#edit-duedate");
+let EditedInputNoTask = document.querySelector(".edit-no-task-input");
+let EditedInputNoDate = document.querySelector(".edit-no-date-input");
+
 /* Burger Menu*/
 let burgerMenu = document.querySelector("#burger-menu");
 let nav = document.querySelector(".navbar");
@@ -76,11 +82,6 @@ submitForm.addEventListener("click", (e) => {
 
 });
 
-
-let taskListEl = document.getElementById("tasklist");
-
-
-
 function createTask() {
   /*Time Stamp*/
   let currentDate = new Date();
@@ -107,7 +108,7 @@ function createTask() {
   storeTaskArrayLocally();
   
 }
-
+let taskListEl = document.getElementById("tasklist");
 
 /*Render Tasks on DOM*/
 function renderTask(){
@@ -146,8 +147,75 @@ function renderTask(){
 
 }
 
+/*Edited Modal Input*/
+
+let Editedmodal = document.querySelector("#edit-modal");
 function editTask(id){
-  
+
+  /*Submit Edited task Form*/
+
+  EditedsubmitForm.addEventListener("click", (e) => {
+  e.preventDefault();
+  /*Form Validaion*/
+  if (!EditedInputTask.value) {
+    EditedInputNoTask.style.display = "block";
+    EditedInputTask.style.marginTop = "-1em";
+    timeout = setTimeout(() => {
+      EditedInputNoTask.style.display = "none";
+      EditedInputTask.style.marginTop = "0";
+    }, 3000);
+  }
+
+  if (!EditedInputDate.value) {
+    EditedInputNoTask.style.display = "block";
+    EditedInputDate.style.marginTop = "-1em";
+
+    timeout = setTimeout(() => {
+      EditedInputNoTask.style.display = "none";
+      EditedInputDate.style.marginTop = "0";
+    }, 3000);
+    
+  } else {
+    Editedmodal.style.display = "none";
+    InputTask.value = "";
+    InputDate.value = "";
+  }
+
+});
+
+
+
+  /* Close Edited Task Event Listeners */
+
+let closeModal = document.querySelector("#edit-close");
+
+closeModal.addEventListener("click", (e) => {
+  e.preventDefault();
+  modal.style.display = "none";
+  InputNoTask.style.display = "none";
+  InputNoDate.style.display = "none";
+  InputDate.style.marginTop = "0px";
+  InputTask.style.marginTop = "0px";
+  clearTimeout(timeout);
+  InputTask.value = "";
+  InputDate.value = "";
+});
+
+  let divEl = document.createElement("div");
+  divEl.classList.add("task-flex");
+
+  divEl.innerHTML = `<div class="task-buttons">
+            <img src="./resources/icons/edit.png" data-action="edit" alt="Edit Buttin"/>
+            <img src="./resources/icons/bin.png" data-action="remove" alt="Bin Buttons" />
+            <img src="./resources/icons/completed-task.png" data-action="complete" alt="Complete Task Button" />
+          </div>
+    
+          <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
+              <div class="list" id="list-item-date">Due: ${task.date}</div>
+              <div class="list" id="list-item-task">${task.task}</div>
+          </div>`;
+
+          taskListEl.append(divEl);
   console.log('Edit task id ' + id)
 }
 
