@@ -2,6 +2,7 @@
 
 let taskArray = [];
 let completeTaskarray = [];
+
 let submitForm = document.querySelector("#submit");
 let InputTask = document.querySelector("#task");
 let InputDate = document.querySelector("#duedate");
@@ -118,9 +119,9 @@ function renderTask(){
         divEl.classList.add("task-flex");
     
         divEl.innerHTML = `<div class="task-buttons">
-            <img src="./resources/icons/edit.png" data-action="edit" alt="Edit Buttin"/>
-            <img src="./resources/icons/bin.png" data-action="remove" alt="Bin Buttons" />
-            <img src="./resources/icons/completed-task.png" data-action="complete" alt="Complete Task Button" />
+            <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Buttin"/>
+            <img src="./resources/icons/bin.png" class = "remove" data-action="remove" alt="Bin Buttons" />
+            <img src="./resources/icons/completed-task.png" class = "complete" data-action="complete" alt="Complete Task Button" />
           </div>
     
           <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
@@ -150,7 +151,11 @@ function renderTask(){
 /*Edited Modal Input*/
 
 let Editedmodal = document.querySelector("#edit-modal");
+let editBtn = document.querySelector(".edit");
 function editTask(id){
+
+
+  Editedmodal.style.display = "grid";
 
   /*Submit Edited task Form*/
 
@@ -167,11 +172,11 @@ function editTask(id){
   }
 
   if (!EditedInputDate.value) {
-    EditedInputNoTask.style.display = "block";
+    EditedInputNoDate.style.display = "block";
     EditedInputDate.style.marginTop = "-1em";
 
     timeout = setTimeout(() => {
-      EditedInputNoTask.style.display = "none";
+      EditedInputNoDate.style.display = "none";
       EditedInputDate.style.marginTop = "0";
     }, 3000);
     
@@ -183,39 +188,24 @@ function editTask(id){
 
 });
 
-
-
   /* Close Edited Task Event Listeners */
 
-let closeModal = document.querySelector("#edit-close");
+let EditcloseModal = document.querySelector("#edit-close");
 
-closeModal.addEventListener("click", (e) => {
+EditcloseModal.addEventListener("click", (e) => {
   e.preventDefault();
-  modal.style.display = "none";
-  InputNoTask.style.display = "none";
-  InputNoDate.style.display = "none";
-  InputDate.style.marginTop = "0px";
-  InputTask.style.marginTop = "0px";
+  Editedmodal.style.display = "none";
+  EditedInputNoTask.style.display = "none";
+  EditedInputNoDate.style.display = "none";
+  EditedInputDate.style.marginTop = "0px";
+  EditedInputTask.style.marginTop = "0px";
   clearTimeout(timeout);
-  InputTask.value = "";
-  InputDate.value = "";
+  EditedInputTask.value = "";
+  EditedInputDate.value = "";
 });
 
-  let divEl = document.createElement("div");
-  divEl.classList.add("task-flex");
+ 
 
-  divEl.innerHTML = `<div class="task-buttons">
-            <img src="./resources/icons/edit.png" data-action="edit" alt="Edit Buttin"/>
-            <img src="./resources/icons/bin.png" data-action="remove" alt="Bin Buttons" />
-            <img src="./resources/icons/completed-task.png" data-action="complete" alt="Complete Task Button" />
-          </div>
-    
-          <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
-              <div class="list" id="list-item-date">Due: ${task.date}</div>
-              <div class="list" id="list-item-task">${task.task}</div>
-          </div>`;
-
-          taskListEl.append(divEl);
   console.log('Edit task id ' + id)
 }
 
@@ -224,6 +214,7 @@ function removeTask(id){
 }
 
 function completeTask(id){
+  completeTaskarray.push(id);
   console.log('Complete task id ' + id)
 }
 
@@ -245,3 +236,4 @@ function initializeTaskAraryFromLocalStoraege(){
 
 initializeTaskAraryFromLocalStoraege();
 console.log(taskArray);
+console.log(completeTaskarray);

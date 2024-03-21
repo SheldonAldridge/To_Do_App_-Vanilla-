@@ -57,7 +57,7 @@ body{
     margin: 0;
 }
 
-.flex{
+.flex,.edit-flex{
     display: flex;
 }
 
@@ -67,10 +67,7 @@ body{
     display: none;
 }
 
-#edit-modal{
-    position: absolute;
-    z-index: 1;
-}
+
 
 #modal,#edit-modal,input{
     background-color: var(--grey--blue);
