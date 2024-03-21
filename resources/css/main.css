@@ -65,11 +65,11 @@ body{
     display: none;
 }
 
-#modal,input{
+#modal,#edit-modal,input{
     background-color: var(--grey--blue);
 }
 
-.no-task-input,.no-date-input{
+.no-task-input,.no-date-input,.edit-no-task-input,.edit-no-date-input{
     color: var(--error--red);
     margin: 1em;
     display: none;
@@ -86,11 +86,11 @@ input::placeholder, input[type="date"]{
     color:var(--white--blue);
 }
 
-#date{
+#date,#edit-duedate{
     width: 10em;
 }
 
-#date,#task{
+#date,#task,#edit-duedat,#edit-task{
     border-bottom: 1px solid var(--white--blue);
 }
 
@@ -125,7 +125,6 @@ input[type="submit"]{
 .task-buttons img{
     margin: 5px;
     filter: invert(100%) sepia(33%) saturate(4642%) hue-rotate(175deg) brightness(105%) contrast(111%);
-    
 }
 
 .task-flex{

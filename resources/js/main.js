@@ -117,9 +117,9 @@ function renderTask(){
         divEl.classList.add("task-flex");
     
         divEl.innerHTML = `<div class="task-buttons">
-            <img src="./resources/icons/edit.png" id="edit-button" alt="Edit Buttin"/>
-            <img src="./resources/icons/bin.png" id="remove-button" alt="Bin Buttons" />
-            <img src="./resources/icons/completed-task.png" id="complete-button" alt="Complete Task Button" />
+            <img src="./resources/icons/edit.png" data-action="edit" alt="Edit Buttin"/>
+            <img src="./resources/icons/bin.png" data-action="remove" alt="Bin Buttons" />
+            <img src="./resources/icons/completed-task.png" data-action="complete" alt="Complete Task Button" />
           </div>
     
           <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
@@ -127,26 +127,36 @@ function renderTask(){
               <div class="list" id="list-item-task">${task.task}</div>
           </div>`;
     
+        divEl.addEventListener("click",(event) =>{
+          switch(event.target.dataset.action){
+            case 'edit':
+              editTask(task.id)
+              break
+            case 'remove':
+              removeTask(task.id)
+              break
+            case 'complete':
+              completeTask(task.id)
+              break
+          }
+        })
+  
         taskListEl.append(divEl);
-        
       });
 
-    // Event listener for edit buttons
-    let editBtns = document.querySelectorAll("#edit-button");
-    
+}
 
-    editBtns.forEach(editBtn => {
+function editTask(id){
+  
+  console.log('Edit task id ' + id)
+}
 
-      
-      let toDoTask = grandparent.querySelector(".task-to-do")
-      let dataId = toDoTask.getAttribute("data-id");
-      
-      editBtn.addEventListener("click", (event) => {
-          console.log(`Edit button clicked for task with data-id: ${dataId}`);
-          
-      });
-  });
-    
+function removeTask(id){
+  console.log('Remove task id ' + id)
+}
+
+function completeTask(id){
+  console.log('Complete task id ' + id)
 }
 
 /*Local Storage*/
