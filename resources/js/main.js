@@ -155,10 +155,9 @@ let editBtn = document.querySelector(".edit");
 function editTask(id){
 
 
+  
   Editedmodal.style.display = "grid";
-
   /*Submit Edited task Form*/
-
   EditedsubmitForm.addEventListener("click", (e) => {
   e.preventDefault();
   /*Form Validaion*/
@@ -185,6 +184,8 @@ function editTask(id){
     InputTask.value = "";
     InputDate.value = "";
   }
+
+  
 
 });
 
