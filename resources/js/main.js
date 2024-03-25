@@ -71,16 +71,12 @@ submitForm.addEventListener("click", (e) => {
       InputNoDate.style.display = "none";
       InputNoDate.style.marginTop = "0";
     }, 3000);
-    
   } else {
     createTask();
     modal.style.display = "none";
     InputTask.value = "";
     InputDate.value = "";
   }
-
-  
-
 });
 
 function createTask() {
@@ -95,7 +91,9 @@ function createTask() {
   let seconds = currentDate.getSeconds().toString().padStart(2, "0");
 
   let timeStamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-  let randomId = Math.round(Math.random() * parseInt(`${year}${month}${day}`, 10) * 100);
+  let randomId = Math.round(
+    Math.random() * parseInt(`${year}${month}${day}`, 10) * 100
+  );
 
   let taskObj = {
     timeStamp: timeStamp,
@@ -105,20 +103,18 @@ function createTask() {
   };
 
   taskArray.push(taskObj);
-  renderTask()
+  renderTask();
   storeTaskArrayLocally();
-  
 }
 let taskListEl = document.getElementById("tasklist");
 
 /*Render Tasks on DOM*/
-function renderTask(){
-    
-    taskArray.forEach((task) => {
-        let divEl = document.createElement("div");
-        divEl.classList.add("task-flex");
-    
-        divEl.innerHTML = `<div class="task-buttons">
+function renderTask() {
+  taskArray.forEach((task) => {
+    let divEl = document.createElement("div");
+    divEl.classList.add("task-flex");
+
+    divEl.innerHTML = `<div class="task-buttons">
             <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Buttin"/>
             <img src="./resources/icons/bin.png" class = "remove" data-action="remove" alt="Bin Buttons" />
             <img src="./resources/icons/completed-task.png" class = "complete" data-action="complete" alt="Complete Task Button" />
@@ -128,95 +124,93 @@ function renderTask(){
               <div class="list" id="list-item-date">Due: ${task.date}</div>
               <div class="list" id="list-item-task">${task.task}</div>
           </div>`;
-    
-        divEl.addEventListener("click",(event) =>{
-          switch(event.target.dataset.action){
-            case 'edit':
-              editTask(task.id)
-              break
-            case 'remove':
-              removeTask(task.id)
-              break
-            case 'complete':
-              completeTask(task.id)
-              break
-          }
-        })
-  
-        taskListEl.append(divEl);
-      });
 
+    divEl.addEventListener("click", (event) => {
+      switch (event.target.dataset.action) {
+        case "edit":
+          editTask(task.id);
+          break;
+        case "remove":
+          removeTask(task.id);
+          break;
+        case "complete":
+          completeTask(task.id);
+          break;
+      }
+    });
+
+    taskListEl.append(divEl);
+  });
 }
 
 /*Edited Modal Input*/
 
 let Editedmodal = document.querySelector("#edit-modal");
 let editBtn = document.querySelector(".edit");
-function editTask(id){
+
+function editTask(id,) {
+  let taskIndex = taskArray.findIndex((task) => task.id === id);
 
 
-  
   Editedmodal.style.display = "grid";
   /*Submit Edited task Form*/
   EditedsubmitForm.addEventListener("click", (e) => {
-  e.preventDefault();
-  /*Form Validaion*/
-  if (!EditedInputTask.value) {
-    EditedInputNoTask.style.display = "block";
-    EditedInputTask.style.marginTop = "-1em";
-    timeout = setTimeout(() => {
-      EditedInputNoTask.style.display = "none";
-      EditedInputTask.style.marginTop = "0";
-    }, 3000);
-  }
 
-  if (!EditedInputDate.value) {
-    EditedInputNoDate.style.display = "block";
-    EditedInputDate.style.marginTop = "-1em";
+    e.preventDefault();
+    /*Form Validaion*/
+    if (!EditedInputTask.value) {
+      EditedInputNoTask.style.display = "block";
+      EditedInputTask.style.marginTop = "-1em";
+      timeout = setTimeout(() => {
+        EditedInputNoTask.style.display = "none";
+        EditedInputTask.style.marginTop = "0";
+      }, 3000);
+    }
 
-    timeout = setTimeout(() => {
-      EditedInputNoDate.style.display = "none";
-      EditedInputDate.style.marginTop = "0";
-    }, 3000);
-    
-  } else {
-    Editedmodal.style.display = "none";
-    InputTask.value = "";
-    InputDate.value = "";
-  }
+    if (!EditedInputDate.value) {
+      EditedInputNoDate.style.display = "block";
+      EditedInputDate.style.marginTop = "-1em";
 
-  
-
-});
-
-  /* Close Edited Task Event Listeners */
-
-let EditcloseModal = document.querySelector("#edit-close");
-
-EditcloseModal.addEventListener("click", (e) => {
-  e.preventDefault();
-  Editedmodal.style.display = "none";
-  EditedInputNoTask.style.display = "none";
-  EditedInputNoDate.style.display = "none";
-  EditedInputDate.style.marginTop = "0px";
-  EditedInputTask.style.marginTop = "0px";
-  clearTimeout(timeout);
-  EditedInputTask.value = "";
-  EditedInputDate.value = "";
-});
+      timeout = setTimeout(() => {
+        EditedInputNoDate.style.display = "none";
+        EditedInputDate.style.marginTop = "0";
+      }, 3000);
+    } else {
+      Editedmodal.style.display = "none";
+      EditedInputTask.value = "";
+      EditedInputDate.value = "";
+    }
 
  
 
-  console.log('Edit task id ' + id)
+    console.log(newTask)
+  });
+
+  /* Close Edited Task Event Listeners */
+
+  let EditcloseModal = document.querySelector("#edit-close");
+
+  EditcloseModal.addEventListener("click", (e) => {
+    e.preventDefault();
+    Editedmodal.style.display = "none";
+    EditedInputNoTask.style.display = "none";
+    EditedInputNoDate.style.display = "none";
+    EditedInputDate.style.marginTop = "0px";
+    EditedInputTask.style.marginTop = "0px";
+    clearTimeout(timeout);
+    EditedInputTask.value = "";
+    EditedInputDate.value = "";
+  });
+
+  console.log("Edit task id " + id);
 }
 
-function removeTask(id){
-  console.log('Remove task id ' + id)
+function removeTask(id) {
+  console.log("Remove task id " + id);
 }
 
-function completeTask(id){
-  completeTaskarray.push(id);
-  console.log('Complete task id ' + id)
+function completeTask(id) {
+  console.log("Complete task id " + id);
 }
 
 /*Local Storage*/
@@ -225,14 +219,13 @@ function storeTaskArrayLocally() {
   localStorage.setItem("taskLocalstorage", JSON.stringify(taskArray));
 }
 
-function initializeTaskAraryFromLocalStoraege(){
+function initializeTaskAraryFromLocalStoraege() {
   const storedTask = localStorage.getItem("taskLocalstorage");
 
-  if(storedTask){
-      taskArray = JSON.parse(storedTask);
-      renderTask();
+  if (storedTask) {
+    taskArray = JSON.parse(storedTask);
+    renderTask();
   }
-  
 }
 
 initializeTaskAraryFromLocalStoraege();
