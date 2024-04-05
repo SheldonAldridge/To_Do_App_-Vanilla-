@@ -148,9 +148,15 @@ function renderTask() {
 let Editedmodal = document.querySelector("#edit-modal");
 let editBtn = document.querySelector(".edit");
 
-function editTask(id,) {
+function editTask(id) {
   let taskIndex = taskArray.findIndex((task) => task.id === id);
+  let taskElement = document.querySelector(`.task-to-do[data-id="${id}"]`);
 
+  let Editedmodal = document.querySelector("#edit-modal");
+
+
+  EditedInputTask.value = taskArray[taskIndex].task;
+  EditedInputDate.value = taskArray[taskIndex].date;
 
   Editedmodal.style.display = "grid";
   /*Submit Edited task Form*/
@@ -179,11 +185,16 @@ function editTask(id,) {
       Editedmodal.style.display = "none";
       EditedInputTask.value = "";
       EditedInputDate.value = "";
+      taskArray[taskIndex].task = taskObjEdited;
+      taskArray[taskObjEdited.task] = DateStore;
     }
 
- 
+    taskArray[taskIndex].task = EditedInputTask.value;
+    taskArray[taskIndex].date = EditedInputDate.value;
 
-    console.log(newTask)
+    taskElement.querySelector("#list-item-date").textContent = `Due: ${taskArray[taskIndex].date}`;
+    taskElement.querySelector("#list-item-task").textContent = taskArray[taskIndex].task;
+
   });
 
   /* Close Edited Task Event Listeners */
