@@ -148,7 +148,7 @@ function renderTask() {
 let Editedmodal = document.querySelector("#edit-modal");
 let editBtn = document.querySelector(".edit");
 
-function editTask(id) {
+function editTask(id,task) {
   let taskIndex = taskArray.findIndex((task) => task.id === id);
   let taskElement = document.querySelector(`.task-to-do[data-id="${id}"]`);
 
@@ -156,9 +156,13 @@ function editTask(id) {
   let EditedInputTask = document.querySelector("#edit-task");
   let EditedInputDate = document.querySelector("#edit-duedate");
 
+  EditedObject = {
+    EditTask: taskArray[taskIndex].task,
+    Editdate: taskArray[taskIndex].date
+  }
 
-  EditedInputTask.value = taskArray[taskIndex].task;
-  EditedInputDate.value = taskArray[taskIndex].date;
+  EditedInputTask.value = EditedObject.editTask;
+  EditedInputDate.value = EditedObject.Editdate;
 
   Editedmodal.style.display = "grid";
   /*Submit Edited task Form*/
@@ -192,11 +196,14 @@ function editTask(id) {
     taskArray[taskIndex].task = EditedInputTask.value;
     taskArray[taskIndex].date = EditedInputDate.value;
 
-    
+
     taskElement.querySelector("#list-item-date").textContent = `Due: ${taskArray[taskIndex].date}`;
     taskElement.querySelector("#list-item-task").textContent = taskArray[taskIndex].task;
 
     storeTaskArrayLocally();
+    renderTask();
+
+    console.log(EditedObject)
 
   });
 
