@@ -227,11 +227,29 @@ function editTask(id,task) {
 }
 
 function removeTask(id) {
+  let removeItem = document.querySelector(`.remove[data-id="${id}"]`)
+  
+
+  removeItem.addEventListener("click",()=>{
+    let taskIndex = taskArray.findIndex((task) => task.id === id);
+    if(taskIndex !== -1){
+      taskArray.splice(taskIndex)
+      console.log(taskArray)
+      
+    }
+  });
+
+  renderTask()
+  storeTaskArrayLocally();
   console.log("Remove task id " + id);
 }
 
 function completeTask(id) {
+  let taskIndex = taskArray.findIndex((task) => task.id === id);
   console.log("Complete task id " + id);
+  console.log(taskIndex);
+
+  completeTaskarray.push(taskArray[taskIndex]);
 }
 
 /*Local Storage*/
@@ -252,3 +270,4 @@ function initializeTaskAraryFromLocalStoraege() {
 initializeTaskAraryFromLocalStoraege();
 console.log(taskArray);
 console.log(completeTaskarray);
+
