@@ -114,8 +114,9 @@ function renderTask() {
   taskArray.forEach((task) => {
     let divEl = document.createElement("div");
     divEl.classList.add("task-flex");
+   
 
-    divEl.innerHTML = `<div class="task-buttons">
+    divEl.innerHTML = `<div class="task-buttons" data-id="${task.id}">
             <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Buttin"/>
             <img src="./resources/icons/bin.png" class = "remove" data-action="remove" alt="Bin Buttons" />
             <img src="./resources/icons/completed-task.png" class = "complete" data-action="complete" alt="Complete Task Button" />
@@ -154,8 +155,8 @@ function editTask(id) {
   let taskElement = document.querySelector(`.task-to-do[data-id="${id}"]`);
 
   let Editedmodal = document.querySelector("#edit-modal");
-  let EditedInputTask = document.querySelector("#edit-task");
-  let EditedInputDate = document.querySelector("#edit-duedate");
+  let EditedTask = document.querySelector("#edit-task");
+  let EditedDate = document.querySelector("#edit-duedate");
 
   EditedObject = {
     EditTask: taskArray[taskIndex].task,
@@ -165,9 +166,10 @@ function editTask(id) {
   Editedmodal.style.display = "grid";
   /*Submit Edited task Form*/
   EditedsubmitForm.addEventListener("click", (e) => {
-
-    EditedInputTask.value = EditedObject.editTask;
-    EditedInputDate.value = EditedObject.Editdate;
+    e.preventDefault();
+    
+    EditedTask.value = EditedObject.EditTask;
+    EditedDate.value = EditedObject.Editdate;
 
     /*Form Validaion*/
     if (!EditedInputTask.value) {
@@ -180,34 +182,34 @@ function editTask(id) {
     }
 
     if (!EditedInputDate.value) {
-      EditedInputNoDate.style.display = "block";
-      EditedInputDate.style.marginTop = "-1em";
+        EditedInputNoDate.style.display = "block";
+        EditedInputDate.style.marginTop = "-1em";
 
-      timeout = setTimeout(() => {
+        timeout = setTimeout(() => {
         EditedInputNoDate.style.display = "none";
         EditedInputDate.style.marginTop = "0";
       }, 3000);
     } else {
       Editedmodal.style.display = "none";
   
- // Update task values in taskArray
- taskArray[taskIndex].task = EditedInputTask.value;
- taskArray[taskIndex].date = EditedInputDate.value;
+      EditedInputTask.value = "";
+      EditedInputDate.value = "";
 
- // Update task values in the DOM
- taskElement.querySelector("#list-item-date").textContent = `Due: ${taskArray[taskIndex].date}`;
- taskElement.querySelector("#list-item-task").textContent = taskArray[taskIndex].task;
+      // Update task values in taskArray
+      taskArray[taskIndex].task = EditedTask.value;
+      taskArray[taskIndex].date = EditedDate.value;
 
- EditedInputTask.value = "";
-EditedInputDate.value = "";
- 
- renderTask();
- storeTaskArrayLocally();
-
+      // Update task values in the DOM
+      taskElement.querySelector("#list-item-date").textContent = `Due: ${taskArray[taskIndex].date}`;
+      taskElement.querySelector("#list-item-task").textContent = taskArray[taskIndex].task;
+      
+      renderTask();
+      storeTaskArrayLocally();
 
     }
 
-    console.log(EditedObject)
+    console.log(EditedObject);
+    console.log(EditedTask);
   });
 
   /* Close Edited Task Event Listeners */
@@ -230,20 +232,18 @@ EditedInputDate.value = "";
 }
 
 function removeTask(id) {
-  let removeItem = document.querySelector(`.remove[data-id="${id}"]`)
-  console.log(removeItem);
+  let taskEl = document.querySelector(`.task-to-do[data-id="${id}"]`);
+  let taskFlexEl = taskEl.closest(".task-flex");
 
-  removeItem.addEventListener("click",()=>{
-    let taskIndex = taskArray.findIndex((task) => task.id === id);
-    if(taskIndex !== -1){
-      taskArray.splice(taskIndex);
-    }
+  taskFlexEl.remove();
+  
+  let taskIndex = taskArray.findIndex((task) => task.id === id);
+  if (taskIndex !== -1) {
+    taskArray.splice(taskIndex, 1);
+    console.log("Task " + id + " removed");
+  }
 
-  });
-
-  renderTask()
   storeTaskArrayLocally();
-  console.log("Remove task id " + id);
 }
 
 function completeTask(id) {
@@ -269,6 +269,6 @@ function initializeTaskAraryFromLocalStoraege() {
 }
 
 initializeTaskAraryFromLocalStoraege();
-console.log(taskArray);
-console.log(completeTaskarray);
+//console.log(taskArray);
+//console.log(completeTaskarray);
 
