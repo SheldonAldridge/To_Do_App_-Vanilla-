@@ -38,7 +38,7 @@ addTaskBtn.addEventListener("click", () => {
 let closeModal = document.querySelector("#close");
 
 closeModal.addEventListener("click", (e) => {
-  e.preventDefault();
+  
   modal.style.display = "none";
   InputNoTask.style.display = "none";
   InputNoDate.style.display = "none";
@@ -52,7 +52,7 @@ closeModal.addEventListener("click", (e) => {
 /*Submit Task Form*/
 
 submitForm.addEventListener("click", (e) => {
-  e.preventDefault();
+ 
   /*Form Validaion*/
   if (!InputTask.value) {
     InputNoTask.style.display = "block";
@@ -166,7 +166,6 @@ function editTask(id) {
   Editedmodal.style.display = "grid";
   /*Submit Edited task Form*/
   EditedsubmitForm.addEventListener("click", (e) => {
-    e.preventDefault();
     
     EditedTask.value = EditedObject.EditTask;
     EditedDate.value = EditedObject.Editdate;
@@ -217,7 +216,6 @@ function editTask(id) {
   let EditcloseModal = document.querySelector("#edit-close");
 
   EditcloseModal.addEventListener("click", (e) => {
-    e.preventDefault();
     Editedmodal.style.display = "none";
     EditedInputNoTask.style.display = "none";
     EditedInputNoDate.style.display = "none";
