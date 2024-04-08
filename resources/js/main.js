@@ -106,6 +106,7 @@ function createTask() {
   renderTask();
   storeTaskArrayLocally();
 }
+
 let taskListEl = document.getElementById("tasklist");
 
 /*Render Tasks on DOM*/
@@ -148,7 +149,7 @@ function renderTask() {
 let Editedmodal = document.querySelector("#edit-modal");
 let editBtn = document.querySelector(".edit");
 
-function editTask(id,task) {
+function editTask(id) {
   let taskIndex = taskArray.findIndex((task) => task.id === id);
   let taskElement = document.querySelector(`.task-to-do[data-id="${id}"]`);
 
@@ -161,14 +162,13 @@ function editTask(id,task) {
     Editdate: taskArray[taskIndex].date
   }
 
-  EditedInputTask.value = EditedObject.editTask;
-  EditedInputDate.value = EditedObject.Editdate;
-
   Editedmodal.style.display = "grid";
   /*Submit Edited task Form*/
   EditedsubmitForm.addEventListener("click", (e) => {
 
-    e.preventDefault();
+    EditedInputTask.value = EditedObject.editTask;
+    EditedInputDate.value = EditedObject.Editdate;
+
     /*Form Validaion*/
     if (!EditedInputTask.value) {
       EditedInputNoTask.style.display = "block";
@@ -189,22 +189,25 @@ function editTask(id,task) {
       }, 3000);
     } else {
       Editedmodal.style.display = "none";
-      EditedInputTask.value = "";
-      EditedInputDate.value = "";
+  
+ // Update task values in taskArray
+ taskArray[taskIndex].task = EditedInputTask.value;
+ taskArray[taskIndex].date = EditedInputDate.value;
+
+ // Update task values in the DOM
+ taskElement.querySelector("#list-item-date").textContent = `Due: ${taskArray[taskIndex].date}`;
+ taskElement.querySelector("#list-item-task").textContent = taskArray[taskIndex].task;
+
+ EditedInputTask.value = "";
+EditedInputDate.value = "";
+ 
+ renderTask();
+ storeTaskArrayLocally();
+
+
     }
 
-    taskArray[taskIndex].task = EditedInputTask.value;
-    taskArray[taskIndex].date = EditedInputDate.value;
-
-
-    taskElement.querySelector("#list-item-date").textContent = `Due: ${taskArray[taskIndex].date}`;
-    taskElement.querySelector("#list-item-task").textContent = taskArray[taskIndex].task;
-
-    storeTaskArrayLocally();
-    renderTask();
-
     console.log(EditedObject)
-
   });
 
   /* Close Edited Task Event Listeners */
@@ -228,15 +231,14 @@ function editTask(id,task) {
 
 function removeTask(id) {
   let removeItem = document.querySelector(`.remove[data-id="${id}"]`)
-  
+  console.log(removeItem);
 
   removeItem.addEventListener("click",()=>{
     let taskIndex = taskArray.findIndex((task) => task.id === id);
     if(taskIndex !== -1){
-      taskArray.splice(taskIndex)
-      console.log(taskArray)
-      
+      taskArray.splice(taskIndex);
     }
+
   });
 
   renderTask()
@@ -253,7 +255,6 @@ function completeTask(id) {
 }
 
 /*Local Storage*/
-
 function storeTaskArrayLocally() {
   localStorage.setItem("taskLocalstorage", JSON.stringify(taskArray));
 }

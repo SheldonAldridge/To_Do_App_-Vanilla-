@@ -61,13 +61,9 @@ body{
     display: flex;
 }
 
-
-
 #modal,#edit-modal{
     display: none;
 }
-
-
 
 #modal,#edit-modal,input{
     background-color: var(--grey--blue);
