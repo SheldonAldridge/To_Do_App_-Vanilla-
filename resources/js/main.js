@@ -241,16 +241,27 @@ function removeTask(id) {
     console.log("Task " + id + " removed");
   }
 
+
   storeTaskArrayLocally();
 }
 
 function completeTask(id) {
-  let taskIndex = taskArray.findIndex((task) => task.id === id);
-  console.log("Complete task id " + id);
-  console.log(taskIndex);
+  let taskEl = document.querySelector(`.task-to-do[data-id="${id}"]`)
 
-  completeTaskarray.push(taskArray[taskIndex]);
+  let taskIndex = taskArray.findIndex((task) => task.id === id);
+  if(taskIndex !== -1){
+    let completedTask = taskArray.splice(taskArray.splice(taskIndex, 1)[0])
+    
+    completeTaskarray.push(completedTask);
+
+  renderTask();
+  storeTaskArrayLocally();
+
+  window.location.reload()
+  }
 }
+
+
 
 /*Local Storage*/
 function storeTaskArrayLocally() {
