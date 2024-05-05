@@ -160,7 +160,7 @@ function editTask(id) {
 
   EditedObject = {
     EditTask: taskArray[taskIndex].task,
-    Editdate: taskArray[taskIndex].date
+    EditDate: taskArray[taskIndex].date
   }
 
   Editedmodal.style.display = "grid";
@@ -168,7 +168,7 @@ function editTask(id) {
   EditedsubmitForm.addEventListener("click", (e) => {
     
     EditedTask.value = EditedObject.EditTask;
-    EditedDate.value = EditedObject.Editdate;
+    EditedDate.value = EditedObject.EditDate;
 
     /*Form Validaion*/
     if (!EditedInputTask.value) {
@@ -252,8 +252,6 @@ function completeTask(id) {
   completeTaskArray.push(taskArray[taskIndex]);
 }
 
-
-
 function renderCompletedTask(){
 
   let completedTaskEl = document.createElement('div');
@@ -264,7 +262,7 @@ function renderCompletedTask(){
     divEl.classList.add("task-flex");
 
     completedTaskEl.innerHTML = `<div class="task-buttons" data-id="${task.id}">
-    <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Buttin"/>
+    <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Button"/>
     <img src="./resources/icons/bin.png" class = "remove" data-action="remove" alt="Bin Buttons" />
     <img src="./resources/icons/completed-task.png" class = "complete" data-action="complete" alt="Complete Task Button" />
   </div>
@@ -296,4 +294,4 @@ function initializeTaskAraryFromLocalStoraege() {
 
 initializeTaskAraryFromLocalStoraege();
 //console.log(taskArray);
-//console.log(completeTaskarray);
+console.log(completeTaskArray);
