@@ -1,20 +1,29 @@
 /*Global Variables*/
 
+/*Arrays*/
 let taskArray = [];
 let completeTaskArray = [];
 
+/*Selecting HTML Elements created in Javascrip*/
 let submitForm = document.querySelector("#submit");
 let InputTask = document.querySelector("#task");
 let InputDate = document.querySelector("#duedate");
 let InputNoTask = document.querySelector(".no-task-input");
 let InputNoDate = document.querySelector(".no-date-input");
-let timeout;
-
+/*Selecting HTML Edited Elements created in Javascrip*/
 let EditedsubmitForm = document.querySelector("#edit-submit");
 let EditedInputTask = document.querySelector("#edit-task");
 let EditedInputDate = document.querySelector("#edit-duedate");
 let EditedInputNoTask = document.querySelector(".edit-no-task-input");
 let EditedInputNoDate = document.querySelector(".edit-no-date-input");
+
+/*Variable for storing data*/
+let timeout;
+
+/*Selecting HTML Elements*/
+let completedTaskBtn = document.querySelector('#completedTask');
+
+/*Global Variables*/
 
 /* Burger Menu*/
 let burgerMenu = document.querySelector("#burger-menu");
@@ -48,6 +57,16 @@ closeModal.addEventListener("click", (e) => {
   InputTask.value = "";
   InputDate.value = "";
 });
+
+/*Show Completed Task Array*/
+completedTaskBtn.addEventListener('click', () =>{
+  console.log("completed Task Button pressed");
+  let completedTask = document.querySelector('#completedTaskList');
+  completedTask.style.display = 'block';
+  taskListEl.style.display = 'none';
+  renderCompletedTask();
+  storeCompleteArrayLocally()
+})
 
 /*Submit Task Form*/
 
@@ -246,20 +265,23 @@ function removeTask(id) {
 
 function completeTask(id) {
   let taskIndex = taskArray.findIndex((task) => task.id === id);
-  console.log("Complete task id " + id);
-  console.log(taskIndex);
-
-  completeTaskArray.push(taskArray[taskIndex]);
+  if(taskIndex !== -1){
+    completeTaskArray.push(taskArray[taskIndex]);
+    taskArray.splice(taskIndex, 1);
+    renderCompletedTask()
+    storeCompleteArrayLocally()
+    storeTaskArrayLocally()
+    window.location.reload();
+  }
 }
 
 function renderCompletedTask(){
-
   let completedTaskEl = document.createElement('div');
   let completedTask = document.querySelector('#completedTaskList');
 
-  completeTask.forEach((task) => {
+  completeTaskArray.forEach((task) => {
 
-    divEl.classList.add("task-flex");
+    completedTaskEl.classList.add("task-flex");
 
     completedTaskEl.innerHTML = `<div class="task-buttons" data-id="${task.id}">
     <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Button"/>
@@ -273,17 +295,16 @@ function renderCompletedTask(){
   </div>`
   });
 
-  completedTaskEl.append(completedTask);
+  completedTask.append(completedTaskEl);
+  
 }
 
-
-
-/*Local Storage*/
+/*Local TaskArray Storage*/
 function storeTaskArrayLocally() {
   localStorage.setItem("taskLocalstorage", JSON.stringify(taskArray));
 }
 
-function initializeTaskAraryFromLocalStoraege() {
+function initializeTaskArrayFromLocalStorage() {
   const storedTask = localStorage.getItem("taskLocalstorage");
 
   if (storedTask) {
@@ -292,6 +313,22 @@ function initializeTaskAraryFromLocalStoraege() {
   }
 }
 
-initializeTaskAraryFromLocalStoraege();
-//console.log(taskArray);
-console.log(completeTaskArray);
+/*Local Completed Task Array Storage*/
+function storeCompleteArrayLocally() {
+  localStorage.setItem("completeLocalstorage", JSON.stringify(completeTaskArray));
+}
+
+function initializeCompleteArrayFromLocalStorage() {
+  const storedTask = localStorage.getItem("completeLocalstorage");
+
+  if (storedTask) {
+    completeTaskArray = JSON.parse(storedTask);
+    renderTask();
+  }
+}
+
+initializeCompleteArrayFromLocalStorage();
+initializeTaskArrayFromLocalStorage();
+
+console.log(`This is list of tasks Array  ${JSON.stringify(taskArray)}`);
+console.log(`This is list of completed tasks Array ${JSON.stringify(completeTaskArray)}`);
