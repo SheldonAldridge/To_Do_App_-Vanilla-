@@ -173,6 +173,10 @@ input[type="submit"]{
     transform: translateX(0%);
 }
 
+#completedTaskList{
+    display: none;
+}
+
 /*Burger Menu Animation*/
 
 @keyframes Burg-slide-down {
