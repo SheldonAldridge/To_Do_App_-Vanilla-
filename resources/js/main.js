@@ -22,6 +22,7 @@ let timeout;
 
 /*Selecting HTML Elements*/
 let completedTaskBtn = document.querySelector('#completedTask');
+let currentTaskBtn = document.querySelector('#currentTaskBtn');
 
 /*Global Variables*/
 
@@ -60,12 +61,24 @@ closeModal.addEventListener("click", (e) => {
 
 /*Show Completed Task Array*/
 completedTaskBtn.addEventListener('click', () =>{
-  console.log("completed Task Button pressed");
+  let headertext = document.querySelector(".headertext");
+  headertext.innerHTML = "Completed Tasks";
   let completedTask = document.querySelector('#completedTaskList');
   completedTask.style.display = 'block';
   taskListEl.style.display = 'none';
   renderCompletedTask();
-  storeCompleteArrayLocally()
+  
+})
+
+/*Show Current Task Array*/
+currentTaskBtn.addEventListener('click', () =>{
+  let headertext = document.querySelector(".headertext");
+  headertext.innerHTML = "Current Tasks";
+  let completedTask = document.querySelector('#completedTaskList');
+  completedTask.style.display = 'none';
+  taskListEl.style.display = 'block';
+  renderCurrentTask()
+
 })
 
 /*Submit Task Form*/
@@ -128,6 +141,12 @@ function createTask() {
 
 let taskListEl = document.getElementById("tasklist");
 
+
+/*Edited Modal Input*/
+
+let Editedmodal = document.querySelector("#edit-modal");
+let editBtn = document.querySelector(".edit");
+
 /*Render Tasks on DOM*/
 function renderTask() {
   taskArray.forEach((task) => {
@@ -163,11 +182,6 @@ function renderTask() {
     taskListEl.append(divEl);
   });
 }
-
-/*Edited Modal Input*/
-
-let Editedmodal = document.querySelector("#edit-modal");
-let editBtn = document.querySelector(".edit");
 
 function editTask(id) {
   let taskIndex = taskArray.findIndex((task) => task.id === id);
@@ -268,7 +282,6 @@ function completeTask(id) {
   if(taskIndex !== -1){
     completeTaskArray.push(taskArray[taskIndex]);
     taskArray.splice(taskIndex, 1);
-    renderCompletedTask()
     storeCompleteArrayLocally()
     storeTaskArrayLocally()
     window.location.reload();
@@ -276,14 +289,14 @@ function completeTask(id) {
 }
 
 function renderCompletedTask(){
-  let completedTaskEl = document.createElement('div');
+  
   let completedTask = document.querySelector('#completedTaskList');
-
+  let completedTasksHTML = "";
+ 
   completeTaskArray.forEach((task) => {
 
-    completedTaskEl.classList.add("task-flex");
-
-    completedTaskEl.innerHTML = `<div class="task-buttons" data-id="${task.id}">
+    completedTasksHTML += `<div class="task-flex">
+    <div class="task-buttons" data-id="${task.id}">
     <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Button"/>
     <img src="./resources/icons/bin.png" class = "remove" data-action="remove" alt="Bin Buttons" />
     <img src="./resources/icons/completed-task.png" class = "complete" data-action="complete" alt="Complete Task Button" />
@@ -292,11 +305,35 @@ function renderCompletedTask(){
   <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
       <div class="list" id="list-item-date">Due: ${task.date}</div>
       <div class="list" id="list-item-task">${task.task}</div>
+  </div>
   </div>`
   });
 
-  completedTask.append(completedTaskEl);
+  completedTask.innerHTML = completedTasksHTML;
+}
+
+function renderCurrentTask(){
   
+  let currentTask = document.getElementById("tasklist");
+  let currentTasksHTML = "";
+ 
+  taskArray.forEach((task) => {
+
+    currentTasksHTML += `<div class="task-flex">
+    <div class="task-buttons" data-id="${task.id}">
+    <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Button"/>
+    <img src="./resources/icons/bin.png" class = "remove" data-action="remove" alt="Bin Buttons" />
+    <img src="./resources/icons/completed-task.png" class = "complete" data-action="complete" alt="Complete Task Button" />
+  </div>
+
+  <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
+      <div class="list" id="list-item-date">Due: ${task.date}</div>
+      <div class="list" id="list-item-task">${task.task}</div>
+  </div>
+  </div>`
+  });
+
+  currentTask.innerHTML = currentTasksHTML;
 }
 
 /*Local TaskArray Storage*/
