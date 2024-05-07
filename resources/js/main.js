@@ -312,29 +312,7 @@ function renderCompletedTask(){
   completedTask.innerHTML = completedTasksHTML;
 }
 
-function renderCurrentTask(){
-  
-  let currentTask = document.getElementById("tasklist");
-  let currentTasksHTML = "";
- 
-  taskArray.forEach((task) => {
 
-    currentTasksHTML += `<div class="task-flex">
-    <div class="task-buttons" data-id="${task.id}">
-    <img src="./resources/icons/edit.png" class = "edit" data-action="edit" alt="Edit Button"/>
-    <img src="./resources/icons/bin.png" class = "remove" data-action="remove" alt="Bin Buttons" />
-    <img src="./resources/icons/completed-task.png" class = "complete" data-action="complete" alt="Complete Task Button" />
-  </div>
-
-  <div class="task-to-do" data-id="${task.id}" data-value = "${task.timeStamp}">
-      <div class="list" id="list-item-date">Due: ${task.date}</div>
-      <div class="list" id="list-item-task">${task.task}</div>
-  </div>
-  </div>`
-  });
-
-  currentTask.innerHTML = currentTasksHTML;
-}
 
 /*Local TaskArray Storage*/
 function storeTaskArrayLocally() {
