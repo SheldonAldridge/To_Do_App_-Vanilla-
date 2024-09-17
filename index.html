@@ -5,118 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Keep track of your daily tasks." />
 
-    <link rel="stylesheet" href="./resources/css/main.css" />
-    <script src="./resources/js/main.js" defer></script>
+    <link href="./resources/css/main.css" rel="stylesheet" />
+    <script type = "module" src="./resources/js/main.js" defer></script>
+    <script src="https://cdn.tailwindcss.com" ></script>
 
     <title>To Do App</title>
   </head>
   <body>
-    <header>
-      <div id="nav-container">
-        <div id="burger-menu">
-          <img src="./resources/icons/Burger.png" alt="Burger Menu" />
-          <span class = "headertext">Current Tasks</span>
-        </div>
-
-        <nav class="navbar">
-          <ul>
-            <li class="list-item" id="add-task">
-              <img
-                src="./resources/icons/add button.png"
-                alt="Add task button"
-              /><span>Add task</span>
-            </li>
-            <li class="list-item">
-              <img
-                src="./resources/icons/dashboard.png"
-                alt="dashboard button"
-              /><span>Dashboard</span>
-            </li>
-            <li class="list-item" id="currentTaskBtn">
-              <img src="./resources/icons/Tasks.png" alt="Task button" /><span
-                >Current Tasks</span
-              >
-            </li>
-            <li class="list-item" id="completedTask">
-              <img
-                src="./resources/icons/completed-task.png"
-                alt="Completed-Task button"
-              /><span>Completed Tasks</span>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    <section>
-      <form id="modal">
-        <div class="no-task-input">Please add a task!</div>
-        <input type="text" id="task" name="task" placeholder="Add task..."/>
-
-        <div class="no-date-input">Please add a date!</div>
-        <input type="date" id="duedate" placeholder="Choose due date..."/>
-
-        <div class="flex">
-          <input type="submit" id="submit"/>
-          <input type="submit" id="close" value="Close"/>
-        </div>
-      </form>
-    </section>
-
-    <main>
-      <div id="tasklist">
-      
-  <!--
-      <div class="task-flex">
-
-        <div class="task-buttons">
-        <img src="./resources/icons/edit.png" alt="Edit Button"/>
-        <img src="./resources/icons/bin.png" alt="Bin Buttons" />
-        <img src="./resources/icons/completed-task.png" alt="Complete Task Button" />
-      </div>
-
-      <div class="task-to-do" data-id="" data-value = "">
-          <div class="list" id="list-item-date">2024/03/03</div>
-          <div class="list" id="list-item-task"></div>
-      </div>
-    </div>
-  -->
-
-    <form id="edit-modal">
-      <div class="edit-no-task-input">Please edit the task!</div>
-      <input type="text" id="edit-task" name="task" placeholder="Add task..."/>
-
-      <div class="edit-no-date-input">Please edit the date!</div>
-      <input type="date" id="edit-duedate" placeholder="Choose due date..."/>
-
-      <div class="edit-flex">
-        <input type="submit" id="edit-submit"/>
-        <input type="submit" id="edit-close" value="Close"/>
-      </div>
-    </form>
+    <div class="app-container">
 
     </div>
 
-    <div id="completedTaskList">
-      <!--
-      <div class="task-flex">
-
-        <div class="task-buttons">
-        <img src="./resources/icons/edit.png" alt="Edit Button"/>
-        <img src="./resources/icons/bin.png" alt="Bin Buttons" />
-        <img src="./resources/icons/completed-task.png" alt="Complete Task Button" />
-      </div>
-
-      <div class="task-to-do" data-id="" data-value = "">
-          <div class="list" id="list-item-date">2024/03/03</div>
-          <div class="list" id="list-item-task"></div>
-      </div>
-    </div>
-  --></div>
-  
-      
-    </main>
-
-    
   </body>
 </html>
