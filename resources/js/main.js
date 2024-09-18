@@ -1,13 +1,9 @@
-import { userEl } from './userInputComponent.js'
+import { createTask } from './createTaskComponent.js'
 
 let taskArray = [];
 let completedTask = [];
 let removedTasks = [];
 
-userEl('Add Task')
 
-const randomGenID = function(){
-  return Date.now() + Math.floor(Math.random() * 1e6)
-}
-
-
+createTask()
+console.log(taskArray)
