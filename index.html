@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Keep track of your daily tasks." />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
 
-    <link href="./resources/css/main.css" rel="stylesheet" />
-    <script type = "module" src="./resources/js/main.js" defer></script>
-    <script src="https://cdn.tailwindcss.com" ></script>
-
+    <script src="./main.js" defer></script>
     <title>To Do App</title>
-  </head>
-  <body>
-    <div class="app-container">
-      
-    </div>
+</head>
+<body>
+    <header>
+        <div class="heroImage-Container">
+            <div class="headtitle">
+            <h3>To-Do App</h3>
+        </div>
+            <picture>
+                <source srcset="./Images/notepad-256px.png" media="(min-width: 576px)">
+                <source srcset="./Images/notepad-128px.png" media="(min-width: 320px)">
+                <img src="./Images/notepad-128px.png" alt="Night Sky Image">
+            </picture>
+        </div>
+    </header>
 
-  </body>
+    <main>
+        <div id="container">
+            
+                <div class="user-input-container">
+                    <div class="user-input"></div>
+                </div>
+        </div>
+    </main>
+
+    <section>
+        <h3>Tasks</h3>
+            <div class="task-list"></div>
+            <div class="edit-container"></div>
+    </section>
+</body>
 </html>

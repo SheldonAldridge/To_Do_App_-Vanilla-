@@ -1,0 +1,320 @@
+
+//Global Colors
+    //Action,Accents,background colors
+    $pacific-cyan-color:#03d5ff;
+    $puce-color: #CF8BA3;
+    $white-color: #F5F5F5;
+    $grey-dark:#333333;
+    $grey-light:#444444;
+    $grey-lighter:#6d6d6d;
+    $green-color:#26FF00;
+
+
+//Mixins
+@mixin bodyFit($margin,$boxSize){
+    margin: $margin;
+    box-sizing: $boxSize;
+}
+
+@mixin display($display){
+    display: $display;
+}
+
+@mixin position($position){
+    position: $position;
+}
+
+@mixin widthSizes($m-width,$width){
+    max-width: $m-width;
+    width:$width;
+}
+
+@mixin heightAdjustment($height){
+    height: $height;
+}
+
+@mixin imageObject($width,$height,$objectOpt){
+    width: $width;
+    height: $height;
+    object-fit: $objectOpt;
+}
+
+@mixin imagePosition($position){
+    object-position: $position
+}
+
+@mixin PositionElement($position){
+    position: $position
+}
+
+@mixin spaceAdjust($margin,$margin-top,$margin-bottom,$margin-left,$padding,$padding-top,$padding-bottom){
+    margin: $margin;
+    margin-top: $margin-top;
+    margin-bottom: $margin-bottom;
+    margin-left: $margin-left;
+    padding: $padding;
+    padding-top: $padding-top;
+    padding-bottom: $padding-bottom;
+}
+
+@mixin overflow($overflow){
+    overflow-y: $overflow;
+}
+
+@mixin CenterElement($alignItem,$textAlign,$justify){
+    align-items: $alignItem;
+    text-align: $textAlign;
+    justify-content: $justify;
+}
+
+@mixin Colors($B-color,$color){
+    background-color: $B-color;
+    color:$color;
+}
+
+@mixin borders($border,$border-radius,$border-color,$box-shadow,$box-color){
+    border: $border;
+    border-radius:$border-radius ;
+    border-color:$border-color;
+    box-shadow: $box-shadow $box-color;
+}
+
+@mixin gridSystem($column,$size,$gap){
+    display:grid;
+    grid-template-columns: $column $size;
+    column-gap: $gap;
+}
+
+@mixin filterColor($invert,$sepia,$saturate,$hue-rotate,$brightness,$contrast){
+    filter: invert($invert) sepia($sepia) saturate($saturate) hue-rotate($hue-rotate) brightness($brightness) contrast($contrast);
+}
+
+@mixin typography($font-family,$font-size,$font-weight){
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight;
+}
+
+@mixin zIndex($z-index){
+    z-index: $z-index;
+}
+
+@mixin cursor($pointer){
+    cursor: $pointer;
+}
+
+//Includes
+body{
+    @include bodyFit(0,border-box)
+}
+
+.headtitle{
+    @include Colors($puce-color, $grey-dark);
+    @include PositionElement(relative);
+    @include spaceAdjust(null, null, null, null,1px ,null, null);
+    @include borders(50px, null, $pacific-cyan-color, null, null)
+}
+
+//Typography
+h1,h3{
+    @include typography('open sans', null, null);
+    @include Colors(null, $grey-dark);
+}
+
+.heroImage-Container, #container{
+    @include widthSizes(100%,null);
+    @include CenterElement(null,center,null);
+}
+
+.heroImage-Container img{
+    @include spaceAdjust(1rem auto,null,null,null,null,null,null);
+    @include PositionElement(relative);
+}
+
+.user-input-container{
+    @include widthSizes(null,100%);
+    @include spaceAdjust(auto, null, null, null, null, null, null);
+    @include Colors($puce-color,null)
+}
+
+.user-input{
+    @include gridSystem(1fr auto, null, 2em);
+    @include spaceAdjust(0 auto,null,null,null,0,1em,0);
+    @include widthSizes(90%,null);
+    @include CenterElement(null,null,null)
+}
+
+.input-task{
+    @include widthSizes(null,100%);
+    @include borders(1px solid $white-color,null,null,null,null);
+    @include Colors(null,null);
+}
+
+.input-date{
+    @include spaceAdjust(0, 0, 0, null,null, null, null);
+    @include borders(1px solid $white-color,null,null,null,null);
+    
+}
+
+.input-date::-webkit-calendar-picker-indicator{
+    @include Colors(null,null);
+}
+
+.task-button{
+    grid-column: 1 / -1;
+    @include PositionElement(relative);
+    @include spaceAdjust(auto, 2em, 1em,null, 0.5em, 1em, 0.5em);
+    @include Colors($pacific-cyan-color,$grey-dark);
+    @include borders(none, 1em, null,1px 1px 7px,$grey-dark);
+    @include widthSizes(null,50%);
+    @include cursor(pointer);
+}
+
+.delete-task img,.edit-task img{
+    @include widthSizes(null,20%);
+    @include filterColor(59%,95%,1865%,155deg,107%,105%);
+    @include cursor(pointer)
+}
+
+section{
+    @include spaceAdjust(1em, null, null, null, null, null, null);
+}
+
+.task-item{
+    @include display(flex);
+    @include CenterElement(center,null,null);
+    @include Colors($grey-dark, $white-color);
+    @include spaceAdjust(auto, null, 1em, null, 1em,null, null);
+    @include borders(null, 1em, null, null, null);
+}
+
+.task{
+    @include spaceAdjust(null, null, null, 1em, null,null, null);
+}
+
+.task,.date,.delete-task,.edit-task{
+    @include widthSizes(100%,100%);
+    @include spaceAdjust(null, null, null, 1em, null,null, null);
+    @include typography('open sans', 14px, null);
+}
+
+.action-icons{
+    @include widthSizes(100%,100%);
+}
+
+picture img{
+    @include widthSizes(100%,20%)
+}
+
+.complete-task{
+    @include spaceAdjust(auto, null, 1em, null, null,null, null);
+    @include Colors($green-color, $grey-dark);
+    @include borders(null, 1em, null, null, null);
+}
+
+.comp-delete-icon img{
+    @include filterColor(20%,9%,7%,360deg,94%,96%)
+}
+
+.editCurrentTask{
+    @include position(relative);
+    @include widthSizes(null,80%);
+    @include Colors($puce-color,null )
+}
+
+.closebtn{
+    @include widthSizes(100%,10%);
+    @include spaceAdjust(null, null, 1em, null, null, null, null);
+    @include filterColor(14%,1% ,2732% , 314deg, 95%, 83%);
+    @include zIndex(1);
+}
+
+.edit-task-container{
+    @include Colors($puce-color,null);
+    @include spaceAdjust(auto,null,null,null,null,1em,null);
+    @include borders(none, 10px, null,null,null);
+    @include position(absolute); 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.userEdits{
+    @include display(flex);
+    @include spaceAdjust(0 auto,null,null,null,null,null,null);
+    @include widthSizes(null,100%);
+    @include CenterElement(null,null,center);
+}
+
+.editbtns{
+    @include widthSizes(null,100%);
+    @include spaceAdjust(0 auto,null,null,null,null,1em,1em);
+    @include display(flex);
+    @include CenterElement(null,null,center);
+    gap:10px;
+}
+
+.edited-button,.cancel-button{
+    @include Colors($pacific-cyan-color,$grey-dark);
+    @include borders(none, 1em, null,1px 1px 7px,$grey-dark);
+    @include widthSizes(100%,30%);
+}
+
+//Desktop responsive design
+@media (min-width:576px){
+
+    picture img{
+        @include widthSizes(100%,10%)
+    }
+    
+
+    .user-input{
+        @include spaceAdjust( auto auto, null, null, null,null , null, null);
+        @include gridSystem(1fr, auto,2em);
+        @include widthSizes(100%,null);
+        @include CenterElement(center,null,null);
+        
+    }
+
+    .user-input-container{
+        @include widthSizes(null,50%);
+        @include borders(null, 10px, null, null, null);
+    }
+
+    .task-button{
+        grid-column: 1 / -1;
+        @include CenterElement(null,null,center);
+        @include widthSizes(null,30%);
+        @include spaceAdjust(auto, 2em, 1em,null,0.5em, 1em, 0.5em);
+    }
+
+    .closebtn{
+        @include widthSizes(100%,10%);
+        @include spaceAdjust(null, null, 1em, null, null, null, null);
+    }
+
+
+    section h3{
+        @include widthSizes(100%, 50%);
+        @include CenterElement(null,center,null)
+    }
+
+    .task-item{
+        @include widthSizes(100%, 50%);
+    }
+    
+    .input-container{
+        @include gridSystem(2fr,6em ,1em );
+        @include position(absolute);
+        @include Colors($puce-color,$grey-dark);
+        @include spaceAdjust(0, null, 1em, 0, null, 3em, null);
+        @include CenterElement(center,null,null);
+        @include borders(null, 10px, null, null, null);
+        @include widthSizes(100%,85%);
+    }
+
+    .edit-task-container{
+
+        transform: translate(-50%, 50%);
+    }
+}
